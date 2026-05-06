@@ -1,0 +1,44 @@
+{
+  "name": "bicep-node",
+  "version": "0.0.9",
+  "description": "Node wrapper for interacting with the Bicep CLI.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext ts",
+    "lint:fix": "eslint src --ext ts --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthony-c-martin/bicep-node.git"
+  },
+  "keywords": [
+    "bicep"
+  ],
+  "author": "Anthony Martin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anthony-c-martin/bicep-node/issues"
+  },
+  "homepage": "https://github.com/anthony-c-martin/bicep-node#readme",
+  "devDependencies": {
+    "@types/jest": "29.5.14",
+    "@typescript-eslint/eslint-plugin": "7.0.0",
+    "@typescript-eslint/parser": "6.21.0",
+    "eslint": "8.57.1",
+    "eslint-plugin-jest": "28.13.0",
+    "jest": "30.0.0",
+    "prettier": "3.5.3",
+    "ts-jest": "29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "5.8.3"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "bicep-node": "^0.0.9"
+  }
+}
