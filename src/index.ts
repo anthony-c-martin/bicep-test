@@ -2,9 +2,10 @@ import { Bicep } from 'bicep-node';
 import { mkdir } from 'fs/promises';
 import os from 'os';
 import path from 'path';
+import { TokenCredential } from '@azure/core-auth';
+import { DeploymentStacksClient } from '@azure/arm-resourcesdeploymentstacks';
 
-
-export class SnapshotHelper {
+export class BicepTester {
   constructor(private bicep: Bicep) {}
 
   public static async create(bicepVersion: string) {
@@ -13,10 +14,10 @@ export class SnapshotHelper {
     const bicepPath = await Bicep.install(basePath, bicepVersion);
     const bicep = await Bicep.initialize(bicepPath);
 
-    return new SnapshotHelper(bicep);
+    return new BicepTester(bicep);
   }
 
-  async capture(filePath: string, tenantId?: string, subscriptionId?: string, resourceGroup?: string, location?: string, deploymentName?: string) {
+  async snapshot(filePath: string, tenantId?: string, subscriptionId?: string, resourceGroup?: string, location?: string, deploymentName?: string): Promise<SnapshotResult> {
     const response = await this.bicep.getSnapshot({
       path: filePath,
       metadata: {
@@ -28,7 +29,24 @@ export class SnapshotHelper {
       }
     });
 
-    return new Snapshot(JSON.parse(response.snapshot));
+    return JSON.parse(response.snapshot);
+  }
+
+  async deploy(credential: TokenCredential, subscriptionId: string, resourceGroup: string, stackName: string) {
+    const client = new DeploymentStacksClient(credential, subscriptionId);
+
+    await client.deploymentStacks.beginCreateOrUpdateAtResourceGroupAndWait(resourceGroup, stackName, {
+      properties: {
+        actionOnUnmanage: {
+          managementGroups: 'Delete',
+          resourceGroups: 'Delete',
+          resources: 'Delete',
+        },
+        denySettings: {
+          mode: 'None'
+        }
+      }
+    });
   }
 
   dispose() {
@@ -36,16 +54,33 @@ export class SnapshotHelper {
   }
 }
 
-type SnapshotContent = {
-  predictedResources: Record<string, unknown>;
-  diagnostics: string[],
-  outputs: Record<string, unknown>;
-};
+export class DeployResult {
+  constructor(
+    private credential: TokenCredential,
+    private subscriptionId: string, 
+    private resourceGroup: string, 
+    private stackName: string
+  ) {}
 
-export class Snapshot {
-  constructor(private content: SnapshotContent) {}
+  async teardown() {
+    const client = new DeploymentStacksClient(this.credential, this.subscriptionId);
 
-  getResources() {
-    return this.content.predictedResources;
+    await client.deploymentStacks.beginDeleteAtResourceGroupAndWait(this.resourceGroup, this.stackName);
   }
 }
+
+export type SnapshotResource = {
+  id: string;
+  type: string;
+  name: string;
+  apiVersion: string;
+  location?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+};
+
+export type SnapshotResult = {
+  predictedResources: SnapshotResource[];
+  diagnostics: string[];
+  outputs: Record<string, unknown>;
+};

@@ -1,9 +1,16 @@
 {
-  "name": "bicep-node",
-  "version": "0.0.9",
-  "description": "Node wrapper for interacting with the Bicep CLI.",
+  "name": "bicep-test",
+  "version": "0.0.1",
+  "description": "Test library for interacting with the Bicep CLI.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -12,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anthony-c-martin/bicep-node.git"
+    "url": "git+https://github.com/anthony-c-martin/bicep-test.git"
   },
   "keywords": [
     "bicep"
@@ -20,25 +27,26 @@
   "author": "Anthony Martin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anthony-c-martin/bicep-node/issues"
+    "url": "https://github.com/anthony-c-martin/bicep-test/issues"
   },
-  "homepage": "https://github.com/anthony-c-martin/bicep-node#readme",
+  "homepage": "https://github.com/anthony-c-martin/bicep-test#readme",
   "devDependencies": {
-    "@types/jest": "29.5.14",
-    "@typescript-eslint/eslint-plugin": "7.0.0",
-    "@typescript-eslint/parser": "6.21.0",
-    "eslint": "8.57.1",
-    "eslint-plugin-jest": "28.13.0",
-    "jest": "30.0.0",
-    "prettier": "3.5.3",
-    "ts-jest": "29.4.0",
-    "ts-node": "^10.9.2",
-    "typescript": "5.8.3"
+    "@types/jest": "30.0.0",
+    "@typescript-eslint/eslint-plugin": "8.59.2",
+    "@typescript-eslint/parser": "8.59.2",
+    "eslint": "10.3.0",
+    "eslint-plugin-jest": "29.15.2",
+    "@swc/core": "^1.11.24",
+    "@swc/jest": "^0.2.37",
+    "jest": "30.3.0",
+    "prettier": "3.8.3",
+    "typescript": "6.0.3"
   },
   "files": [
     "dist/**/*"
   ],
   "dependencies": {
-    "bicep-node": "^0.0.9"
+    "@azure/arm-resourcesdeploymentstacks": "^1.0.0",
+    "bicep-node": "^0.0.12"
   }
 }
