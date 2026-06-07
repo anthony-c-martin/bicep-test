@@ -46,7 +46,7 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@azure/arm-resourcesdeploymentstacks": "^1.0.0",
+    "@azure/arm-resourcesdeploymentstacks": "^2.0.0",
     "bicep-node": "^0.0.12"
   }
 }
