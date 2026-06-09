@@ -47,6 +47,6 @@
   ],
   "dependencies": {
     "@azure/arm-resourcesdeploymentstacks": "^2.0.0",
-    "bicep-node": "^0.0.12"
+    "@azure/bicep-rpc-client": "^0.2.1"
   }
 }

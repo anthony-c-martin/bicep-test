@@ -1,4 +1,4 @@
-import { Bicep } from 'bicep-node';
+import { Bicep } from '@azure/bicep-rpc-client';
 import { mkdir } from 'fs/promises';
 import os from 'os';
 import path from 'path';

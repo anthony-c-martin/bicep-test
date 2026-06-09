@@ -4,7 +4,7 @@ A POC test library for asserting on [Bicep](https://github.com/Azure/bicep) temp
 
 ## Overview
 
-`bicep-test` provides a Jest-based testing workflow for Bicep infrastructure code. It uses the [bicep-node](https://github.com/anthony-c-martin/bicep-node) library to invoke the Bicep CLI locally and capture a **snapshot** of what a deployment _would_ produce — the predicted resources, outputs, and diagnostics — so you can write fast, offline assertions against your templates.
+`bicep-test` provides a Jest-based testing workflow for Bicep infrastructure code. It uses the [@azure/bicep-rpc-client](https://github.com/Azure/bicep-deploy) library to invoke the Bicep CLI locally and capture a **snapshot** of what a deployment _would_ produce — the predicted resources, outputs, and diagnostics — so you can write fast, offline assertions against your templates.
 
 ## How it works
 
