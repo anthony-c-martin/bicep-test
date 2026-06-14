@@ -39,7 +39,7 @@
     "@swc/core": "^1.15.41",
     "@swc/jest": "^0.2.37",
     "jest": "30.4.2",
-    "prettier": "3.8.3",
+    "prettier": "3.8.4",
     "typescript": "6.0.3"
   },
   "files": [
