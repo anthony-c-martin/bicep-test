@@ -36,7 +36,7 @@
     "@typescript-eslint/parser": "8.65.0",
     "eslint": "10.8.0",
     "eslint-plugin-jest": "29.16.0",
-    "@swc/core": "^1.15.46",
+    "@swc/core": "^1.15.47",
     "@swc/jest": "^0.2.37",
     "jest": "30.4.2",
     "prettier": "3.9.6",
