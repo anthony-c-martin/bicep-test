@@ -1,0 +1,20 @@
+FUNCTION Get-BicepSnapshot
+
+PARAMETER SET __AllParameterSets
+  -Tester <System.Object> [Mandatory, Position=0, ValueFromPipeline]
+  -Path <System.String> [Mandatory, Position=1]
+  -DeploymentName <System.String>
+  -Location <System.String>
+  -ResourceGroup <System.String>
+  -SubscriptionId <System.String>
+  -TenantId <System.String>
+
+FUNCTION New-BicepTester
+
+PARAMETER SET __AllParameterSets
+  -BicepVersion <System.String> [Mandatory, Position=0]
+
+FUNCTION Remove-BicepTester
+
+PARAMETER SET __AllParameterSets
+  -Tester <System.Object> [Mandatory, Position=0, ValueFromPipeline]

@@ -69,3 +69,34 @@ jobs:
     - name: Check public API
       working-directory: packages/go
       run: go run ./internal/apidoc --check
+
+  powershell:
+    name: PowerShell (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Install Pester
+      shell: pwsh
+      run: Install-Module Pester -MinimumVersion 5.7.1 -Scope CurrentUser -Force
+
+    - name: Build
+      shell: pwsh
+      run: ./packages/powershell/build.ps1
+
+    - name: Test
+      shell: pwsh
+      run: Invoke-Pester ./packages/powershell/test -CI
+
+    - name: Check public API
+      shell: pwsh
+      run: ./packages/powershell/scripts/public-api.ps1 -Check

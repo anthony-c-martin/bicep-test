@@ -16,14 +16,18 @@ packages/
 │   ├── BicepTest.slnx
 │   ├── src/BicepTest/
 │   └── test/BicepTest.Tests/
-└── go/
+├── go/
     ├── rpcclient/
     ├── biceptest.go
     ├── snapshot.go
     └── go.mod
+└── powershell/
+    ├── BicepTest/
+    ├── scripts/
+    └── test/
 ```
 
-The Node package defines the reference snapshot behavior. The C# and Go conformance tests exercise the same Bicep fixture and assertions.
+The Node package defines the reference snapshot behavior. The C#, Go, and PowerShell conformance tests exercise the same Bicep fixture and assertions.
 
 ## Node
 
@@ -97,6 +101,31 @@ Project conventions:
 - Keep the public snapshot API in the module root.
 - Keep Bicep installation, process, pipe, and JSON-RPC behavior in the separate `rpcclient` package.
 - Preserve both Windows named-pipe and Unix-domain-socket support when changing the transport.
+
+## PowerShell
+
+Prerequisites:
+
+- PowerShell 7.4 or later
+- .NET 8 SDK or later
+- Pester 5.7 or later
+
+Build and test from the repository root:
+
+```powershell
+./packages/powershell/build.ps1
+Invoke-Pester ./packages/powershell/test -CI
+./packages/powershell/scripts/public-api.ps1 -Check
+```
+
+Review the PowerShell public API in `api/powershell/BicepTest.txt`. After an intentional API change, run `./packages/powershell/scripts/public-api.ps1 -Update` and include the baseline change in the pull request.
+
+Project conventions:
+
+- Keep the module manifest export lists explicit; do not use wildcard exports.
+- Add public commands to `packages/powershell/BicepTest/BicepTest.psm1` and the manifest.
+- Keep the PowerShell commands as a thin, idiomatic wrapper over the C# implementation.
+- Preserve compatibility with PowerShell Core on Windows and Linux.
 
 ## Pull requests
 
