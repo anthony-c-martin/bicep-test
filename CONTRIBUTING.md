@@ -39,9 +39,12 @@ cd packages/node
 npm ci --legacy-peer-deps
 npm run build
 npm test
+npm run api:check
 ```
 
 The legacy peer resolver is currently required because TypeScript 7 is outside the version range declared by the installed `@typescript-eslint` packages.
+
+Review the Node public API in `api/node/bicep-test.d.ts`. After an intentional API change, run `npm run api:update` from `packages/node` and include the baseline change in the pull request.
 
 ## C#
 
@@ -53,6 +56,8 @@ Build and verify packaging from the repository root:
 dotnet test packages/dotnet/BicepTest.slnx
 dotnet pack packages/dotnet/src/BicepTest/BicepTest.csproj --configuration Release
 ```
+
+Review the C# public API in `api/dotnet/PublicAPI.Unshipped.txt`. The Public API analyzer fails the build when a declaration is added or removed without updating this file. Apply the RS0016 or RS0017 code fix after reviewing an intentional API change.
 
 Project conventions:
 
@@ -71,6 +76,7 @@ Test from the repository root:
 ```sh
 cd packages/go
 go test ./...
+go run ./internal/apidoc --check
 ```
 
 Format and analyze Go changes before submitting them:
@@ -80,6 +86,8 @@ cd packages/go
 gofmt -w .
 go vet ./...
 ```
+
+Review the Go public API in `api/go`. After an intentional API change, run `go generate ./...` from `packages/go` and include both affected baselines in the pull request.
 
 Project conventions:
 
@@ -95,4 +103,5 @@ Project conventions:
 - Keep changes scoped to one behavior or package where practical.
 - Add or update tests for behavior changes.
 - Run the relevant language build and test commands before opening a pull request.
+- Review and update the checked-in public API baseline for intentional API changes.
 - Update user documentation when public APIs or supported behavior change.
