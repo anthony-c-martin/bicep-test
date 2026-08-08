@@ -1,0 +1,62 @@
+# Node
+
+The Node package is the current reference implementation of `bicep-test`. It provides a Jest-based workflow for testing the predicted resources, outputs, and diagnostics of a Bicep deployment without deploying to Azure.
+
+## Requirements
+
+- Node.js 22 or later
+- A `.bicepparam` entry point for the Bicep deployment under test
+
+## Installation
+
+```sh
+npm install --save-dev bicep-test
+```
+
+## Usage
+
+Create one tester for the suite, capture the snapshot in setup, and dispose the Bicep process when the suite completes:
+
+```ts
+import { BicepTester, SnapshotResult } from 'bicep-test';
+
+let tester: BicepTester;
+let snapshot: SnapshotResult;
+
+beforeAll(async () => {
+	tester = await BicepTester.create('0.43.1');
+	snapshot = await tester.snapshot(
+		'infra/main.bicepparam',
+		'00000000-0000-0000-0000-000000000000',
+		'00000000-0000-0000-0000-000000000000',
+		'my-resource-group',
+		'eastus',
+		'my-deployment',
+	);
+}, 60000);
+
+afterAll(() => tester.dispose());
+
+it('disables public blob access', () => {
+	const storageAccounts = snapshot.predictedResources.filter(
+		resource => resource.type === 'Microsoft.Storage/storageAccounts',
+	);
+
+	expect(storageAccounts.length).toBeGreaterThan(0);
+	storageAccounts.forEach(resource => {
+		expect(resource.properties?.allowBlobPublicAccess).toBe(false);
+	});
+});
+```
+
+`BicepTester.create()` downloads the requested Bicep CLI version into `~/.bicep/bin` and reuses it on later runs.
+
+## Snapshot result
+
+A snapshot contains:
+
+- `predictedResources`: resources and resolved properties predicted for the deployment
+- `outputs`: resolved deployment outputs
+- `diagnostics`: compilation warnings and errors
+
+Snapshot tests do not require Azure credentials or an Azure subscription.

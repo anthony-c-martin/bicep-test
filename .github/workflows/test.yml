@@ -11,9 +11,12 @@ env:
   USE_NIGHTLY: false
 
 jobs:
-  test:
-    name: Test
+  node:
+    name: Node
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/node
 
     steps:
     - uses: actions/checkout@v7
@@ -24,7 +27,38 @@ jobs:
         node-version: 24
 
     - name: npm ci
-      run: npm ci
+      run: npm ci --legacy-peer-deps
 
     - name: npm test
       run: npm test
+
+  dotnet:
+    name: C#
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Test
+      run: dotnet test packages/dotnet/BicepTest.slnx --configuration Release
+
+  go:
+    name: Go
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Set up Go
+      uses: actions/setup-go@v6
+      with:
+        go-version-file: packages/go/go.mod
+
+    - name: Test
+      working-directory: packages/go
+      run: go test ./...

@@ -5,12 +5,13 @@
       "name": "Run Tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "program": "${workspaceFolder}/packages/node/node_modules/.bin/jest",
       "args": [],
+      "cwd": "${workspaceFolder}/packages/node",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "windows": {
-        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+        "program": "${workspaceFolder}/packages/node/node_modules/jest/bin/jest"
       }
     },
   ]

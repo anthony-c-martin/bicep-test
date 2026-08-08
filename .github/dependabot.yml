@@ -6,9 +6,17 @@ updates:
       interval: "weekly"
       day: "sunday"
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/packages/node"
     schedule:
       interval: "weekly"
       day: "sunday"
-    ignore:
-      - dependency-name: "node-fetch"
+  - package-ecosystem: "nuget"
+    directory: "/packages/dotnet"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+  - package-ecosystem: "gomod"
+    directory: "/packages/go"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
