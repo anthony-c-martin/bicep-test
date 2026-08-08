@@ -2,7 +2,7 @@
   "name": "bicep-test",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
+    "ghcr.io/devcontainers/features/node:2": {
       "version": "24"
     },
     "ghcr.io/devcontainers/features/dotnet:2": {
@@ -20,7 +20,7 @@
       "installMaven": true,
       "mavenVersion": "3.9.9"
     },
-    "ghcr.io/devcontainers/features/powershell:1": {
+    "ghcr.io/devcontainers/features/powershell:2": {
       "version": "7.4",
       "modules": "Pester==5.7.1"
     }
