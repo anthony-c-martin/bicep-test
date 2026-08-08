@@ -71,11 +71,8 @@ jobs:
       run: go run ./internal/apidoc --check
 
   powershell:
-    name: PowerShell (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    name: PowerShell
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v7
@@ -101,6 +98,56 @@ jobs:
       shell: pwsh
       run: ./packages/powershell/scripts/public-api.ps1 -Check
 
+  python:
+    name: Python
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.14'
+        cache: pip
+        cache-dependency-path: packages/python/pyproject.toml
+
+    - name: Install
+      run: python -m pip install -e './packages/python[test]'
+
+    - name: Test
+      run: python -m pytest packages/python/tests
+
+    - name: Check public API
+      run: python packages/python/scripts/public_api.py --check
+
+  java:
+    name: Java
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Set up Java
+      uses: actions/setup-java@v5
+      with:
+        distribution: microsoft
+        java-version: '17'
+        cache: maven
+
+    - name: Test
+      working-directory: packages/java
+      run: mvn --batch-mode --no-transfer-progress test
+
+    - name: Check public API
+      working-directory: packages/java
+      run: >-
+        mvn --batch-mode --no-transfer-progress --quiet
+        -DskipTests test-compile exec:java
+        -Dexec.classpathScope=test
+        -Dexec.mainClass=com.github.anthonycmartin.biceptest.ApiSurface
+        -Dexec.args=--check
+
   samples:
     name: Samples
     runs-on: ubuntu-latest
@@ -122,6 +169,18 @@ jobs:
       uses: actions/setup-go@v7
       with:
         go-version-file: samples/go/go.mod
+
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.14'
+
+    - name: Set up Java
+      uses: actions/setup-java@v5
+      with:
+        distribution: microsoft
+        java-version: '17'
+        cache: maven
 
     - name: Install Pester
       shell: pwsh

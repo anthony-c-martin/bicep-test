@@ -5,18 +5,79 @@ updates:
     schedule:
       interval: "weekly"
       day: "sunday"
+    cooldown:
+      default-days: 7
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
   - package-ecosystem: "npm"
     directory: "/packages/node"
     schedule:
       interval: "weekly"
       day: "sunday"
+    cooldown:
+      default-days: 7
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
   - package-ecosystem: "nuget"
     directory: "/packages/dotnet"
     schedule:
       interval: "weekly"
       day: "sunday"
+    cooldown:
+      default-days: 7
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
   - package-ecosystem: "gomod"
     directory: "/packages/go"
     schedule:
       interval: "weekly"
       day: "sunday"
+    cooldown:
+      default-days: 7
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+  - package-ecosystem: "pip"
+    directories:
+      - "/packages/python"
+      - "/samples/python"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    cooldown:
+      default-days: 7
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+  - package-ecosystem: "maven"
+    directories:
+      - "/packages/java"
+      - "/samples/java"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    cooldown:
+      default-days: 7
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    cooldown:
+      default-days: 7
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"

@@ -1,5 +1,4 @@
-[CmdletBinding()]
-param()
+#!/usr/bin/env pwsh
 
 $ErrorActionPreference = 'Stop'
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
@@ -44,6 +43,20 @@ try {
     Invoke-NativeCommand {
         pwsh -NoProfile -Command '$configuration = New-PesterConfiguration; $configuration.Run.Path = "./samples/powershell"; $configuration.Run.Exit = $true; Invoke-Pester -Configuration $configuration'
     } 'PowerShell sample tests'
+
+    Write-Host 'Installing and running the Python sample tests...'
+    Push-Location samples/python
+    try {
+        Invoke-NativeCommand { python -m pip install -r requirements.txt } 'Python sample dependency restore'
+        Invoke-NativeCommand { python -m pytest -q } 'Python sample tests'
+    }
+    finally {
+        Pop-Location
+    }
+
+    Write-Host 'Building and running the Java sample tests...'
+    Invoke-NativeCommand { mvn --file packages/java/pom.xml --batch-mode --no-transfer-progress install } 'Java library build'
+    Invoke-NativeCommand { mvn --file samples/java/pom.xml --batch-mode --no-transfer-progress test } 'Java sample tests'
 }
 finally {
     Pop-Location

@@ -17,9 +17,11 @@ A set of libraries for writing tests against [Bicep](https://github.com/Azure/bi
 - [C#](docs/csharp.md): implemented, not yet available through NuGet
 - [Go](docs/go.md): implemented, not yet released as a versioned Go module
 - [PowerShell](docs/powershell.md): implemented, not yet available through the PowerShell Gallery
+- [Python](docs/python.md): implemented, not yet available through PyPI
+- [Java](docs/java.md): implemented, not yet available through Maven Central
 
 ## Samples
 
-Runnable test suites under [`samples/`](samples/) demonstrate the same infrastructure assertions with Jest, MSTest, Go's `testing` package, and Pester. They share one Bicep fixture and are compiled and executed in CI.
+Runnable test suites under [`samples/`](samples/) demonstrate the same infrastructure assertions with Jest, MSTest, Go's `testing` package, Pester, pytest, and JUnit. They share one Bicep fixture and are compiled and executed in CI.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for repository setup, build commands, tests, and project conventions.

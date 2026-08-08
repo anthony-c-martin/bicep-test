@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bicep-test"
+version = "0.1.0"
+description = "Test Bicep infrastructure by evaluating deployment snapshots locally."
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Anthony Martin" }]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+bicep_test = ["py.typed"]

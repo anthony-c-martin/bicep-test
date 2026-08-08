@@ -1,0 +1,2 @@
+-e ../../packages/python
+pytest>=8.0

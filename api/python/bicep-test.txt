@@ -1,0 +1,13 @@
+CLASS BicepTester
+  close(self) -> 'None'
+  create(bicep_version: 'str') -> 'Self'
+  snapshot(self, file_path: 'str | os.PathLike[str]', metadata: 'SnapshotMetadata | None' = None) -> 'SnapshotResult'
+
+CLASS SnapshotMetadata
+  SnapshotMetadata(tenant_id: 'str | None' = None, subscription_id: 'str | None' = None, resource_group: 'str | None' = None, location: 'str | None' = None, deployment_name: 'str | None' = None) -> None
+
+CLASS SnapshotResource
+  SnapshotResource(id: 'str', type: 'str', name: 'str', api_version: 'str', location: 'str | None' = None, properties: 'dict[str, Any]' = <factory>, additional_properties: 'dict[str, Any]' = <factory>) -> None
+
+CLASS SnapshotResult
+  SnapshotResult(predicted_resources: 'tuple[SnapshotResource, ...]', diagnostics: 'tuple[str, ...]', outputs: 'dict[str, Any]') -> None

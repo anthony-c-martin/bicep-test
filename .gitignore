@@ -151,3 +151,14 @@ packages/go/coverage.out
 
 # PowerShell
 packages/powershell/BicepTest/lib/
+testResults.xml
+
+# Python
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.venv/
+
+# Java
+**/target/
