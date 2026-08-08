@@ -68,3 +68,7 @@ A snapshot contains:
 - `PredictedResources`: resources and resolved properties predicted for the deployment
 - `Outputs`: resolved deployment outputs
 - `Diagnostics`: compilation warnings and errors
+
+## Public API
+
+The complete exported APIs are available for the [`biceptest`](../api/go/biceptest.txt) and [`rpcclient`](../api/go/rpcclient.txt) packages.

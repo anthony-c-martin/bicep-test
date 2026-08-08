@@ -60,3 +60,7 @@ A snapshot contains:
 - `diagnostics`: compilation warnings and errors
 
 Snapshot tests do not require Azure credentials or an Azure subscription.
+
+## Public API
+
+The complete exported Node API is available in [`api/node/bicep-test.d.ts`](../api/node/bicep-test.d.ts).

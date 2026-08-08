@@ -32,6 +32,9 @@ jobs:
     - name: npm test
       run: npm test
 
+    - name: Check public API
+      run: npm run api:check
+
   dotnet:
     name: C#
     runs-on: ubuntu-latest
@@ -44,7 +47,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Test
+    - name: Test and check public API
       run: dotnet test packages/dotnet/BicepTest.slnx --configuration Release
 
   go:
@@ -62,3 +65,7 @@ jobs:
     - name: Test
       working-directory: packages/go
       run: go test ./...
+
+    - name: Check public API
+      working-directory: packages/go
+      run: go run ./internal/apidoc --check

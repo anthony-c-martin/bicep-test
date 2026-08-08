@@ -1,0 +1,51 @@
+package biceptest // import "github.com/anthony-c-martin/bicep-test/packages/go"
+
+Package biceptest provides helpers for testing Bicep infrastructure code.
+
+TYPES
+
+type SnapshotMetadata = rpcclient.SnapshotMetadata
+    SnapshotMetadata describes the Azure deployment context used to evaluate a
+    snapshot.
+
+type SnapshotResource struct {
+	ID                   string         `json:"id"`
+	Type                 string         `json:"type"`
+	Name                 string         `json:"name"`
+	APIVersion           string         `json:"apiVersion"`
+	Location             string         `json:"location,omitempty"`
+	Properties           map[string]any `json:"properties,omitempty"`
+	AdditionalProperties map[string]any `json:"-"`
+}
+    SnapshotResource is a resource predicted by a Bicep snapshot.
+
+func (resource *SnapshotResource) UnmarshalJSON(data []byte) error
+    UnmarshalJSON preserves resource fields that are not part of the common
+    snapshot model.
+
+type SnapshotResult struct {
+	PredictedResources []SnapshotResource `json:"predictedResources"`
+	Diagnostics        []string           `json:"diagnostics"`
+	Outputs            map[string]any     `json:"outputs"`
+}
+    SnapshotResult is the predicted result of evaluating a Bicep parameters
+    file.
+
+type Tester struct {
+	// Has unexported fields.
+}
+    Tester invokes a pinned Bicep CLI to evaluate infrastructure snapshots.
+
+func New(ctx context.Context, bicepVersion string) (*Tester, error)
+    New installs the requested Bicep CLI version if needed and starts its RPC
+    client.
+
+func (tester *Tester) Close() error
+    Close disconnects from the Bicep CLI and terminates its process.
+
+func (tester *Tester) Snapshot(
+	ctx context.Context,
+	filePath string,
+	metadata SnapshotMetadata,
+) (*SnapshotResult, error)
+    Snapshot evaluates a Bicep parameters file without deploying it.

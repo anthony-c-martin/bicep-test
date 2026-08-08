@@ -43,3 +43,7 @@ A snapshot contains:
 - `PredictedResources`: resources and resolved properties predicted for the deployment
 - `Outputs`: resolved deployment outputs
 - `Diagnostics`: compilation warnings and errors
+
+## Public API
+
+The complete exported C# API is available in [`api/dotnet/PublicAPI.Unshipped.txt`](../api/dotnet/PublicAPI.Unshipped.txt).

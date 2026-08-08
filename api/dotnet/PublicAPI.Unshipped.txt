@@ -1,0 +1,30 @@
+#nullable enable
+BicepTest.BicepTester
+BicepTest.BicepTester.Dispose() -> void
+BicepTest.BicepTester.DisposeAsync() -> System.Threading.Tasks.ValueTask
+BicepTest.BicepTester.SnapshotAsync(string! filePath, string? tenantId = null, string? subscriptionId = null, string? resourceGroup = null, string? location = null, string? deploymentName = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<BicepTest.SnapshotResult!>!
+BicepTest.SnapshotResource
+BicepTest.SnapshotResource.AdditionalProperties.get -> System.Collections.Generic.Dictionary<string!, System.Text.Json.JsonElement>?
+BicepTest.SnapshotResource.AdditionalProperties.init -> void
+BicepTest.SnapshotResource.ApiVersion.get -> string!
+BicepTest.SnapshotResource.ApiVersion.init -> void
+BicepTest.SnapshotResource.Id.get -> string!
+BicepTest.SnapshotResource.Id.init -> void
+BicepTest.SnapshotResource.Location.get -> string?
+BicepTest.SnapshotResource.Location.init -> void
+BicepTest.SnapshotResource.Name.get -> string!
+BicepTest.SnapshotResource.Name.init -> void
+BicepTest.SnapshotResource.Properties.get -> System.Text.Json.JsonElement
+BicepTest.SnapshotResource.Properties.init -> void
+BicepTest.SnapshotResource.SnapshotResource() -> void
+BicepTest.SnapshotResource.Type.get -> string!
+BicepTest.SnapshotResource.Type.init -> void
+BicepTest.SnapshotResult
+BicepTest.SnapshotResult.Diagnostics.get -> string![]!
+BicepTest.SnapshotResult.Diagnostics.init -> void
+BicepTest.SnapshotResult.Outputs.get -> System.Collections.Generic.Dictionary<string!, System.Text.Json.JsonElement>!
+BicepTest.SnapshotResult.Outputs.init -> void
+BicepTest.SnapshotResult.PredictedResources.get -> BicepTest.SnapshotResource![]!
+BicepTest.SnapshotResult.PredictedResources.init -> void
+BicepTest.SnapshotResult.SnapshotResult() -> void
+static BicepTest.BicepTester.CreateAsync(string! bicepVersion, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<BicepTest.BicepTester!>!
