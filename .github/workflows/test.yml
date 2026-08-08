@@ -100,3 +100,33 @@ jobs:
     - name: Check public API
       shell: pwsh
       run: ./packages/powershell/scripts/public-api.ps1 -Check
+
+  samples:
+    name: Samples
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Set up Node
+      uses: actions/setup-node@v7
+      with:
+        node-version: 24
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Set up Go
+      uses: actions/setup-go@v7
+      with:
+        go-version-file: samples/go/go.mod
+
+    - name: Install Pester
+      shell: pwsh
+      run: Install-Module Pester -MinimumVersion 5.7.1 -Scope CurrentUser -Force
+
+    - name: Compile and run samples
+      shell: pwsh
+      run: ./scripts/ValidateSamples.ps1

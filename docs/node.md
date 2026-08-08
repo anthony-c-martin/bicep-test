@@ -61,6 +61,10 @@ A snapshot contains:
 
 Snapshot tests do not require Azure credentials or an Azure subscription.
 
+## Sample
+
+See the runnable [Jest sample](../samples/node/snapshot.test.js) for a complete consumer test using the shared example infrastructure.
+
 ## Public API
 
 The complete exported Node API is available in [`api/node/bicep-test.d.ts`](../api/node/bicep-test.d.ts).

@@ -29,6 +29,12 @@ packages/
 
 The Node package defines the reference snapshot behavior. The C#, Go, and PowerShell conformance tests exercise the same Bicep fixture and assertions.
 
+Runnable consumer tests are under `samples/`. Run all four language samples with:
+
+```powershell
+./scripts/ValidateSamples.ps1
+```
+
 ## Node
 
 Prerequisites:
@@ -134,3 +140,4 @@ Project conventions:
 - Run the relevant language build and test commands before opening a pull request.
 - Review and update the checked-in public API baseline for intentional API changes.
 - Update user documentation when public APIs or supported behavior change.
+- Add or update the native test-framework sample when user-facing workflows change.

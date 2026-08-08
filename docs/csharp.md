@@ -44,6 +44,10 @@ A snapshot contains:
 - `Outputs`: resolved deployment outputs
 - `Diagnostics`: compilation warnings and errors
 
+## Sample
+
+See the runnable [MSTest sample](../samples/dotnet/SnapshotTests.cs) for a complete consumer test using the shared example infrastructure.
+
 ## Public API
 
 The complete exported C# API is available in [`api/dotnet/PublicAPI.Unshipped.txt`](../api/dotnet/PublicAPI.Unshipped.txt).

@@ -69,6 +69,10 @@ A snapshot contains:
 - `Outputs`: resolved deployment outputs
 - `Diagnostics`: compilation warnings and errors
 
+## Sample
+
+See the runnable [Go test sample](../samples/go/snapshot_test.go) for a complete consumer test using the shared example infrastructure.
+
 ## Public API
 
 The complete exported APIs are available for the [`biceptest`](../api/go/biceptest.txt) and [`rpcclient`](../api/go/rpcclient.txt) packages.

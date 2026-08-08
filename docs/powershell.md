@@ -43,6 +43,10 @@ finally {
 
 `New-BicepTester` downloads and reuses the requested Bicep CLI version. Snapshot tests do not require Azure credentials or an Azure subscription.
 
+## Sample
+
+See the runnable [Pester sample](../samples/powershell/BicepTest.Sample.Tests.ps1) for a complete consumer test using the shared example infrastructure.
+
 ## Public API
 
 The complete exported PowerShell API is available in [`api/powershell/BicepTest.txt`](../api/powershell/BicepTest.txt).

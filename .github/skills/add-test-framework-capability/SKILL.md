@@ -50,11 +50,12 @@ If the requested behavior is ambiguous, inspect the nearest existing implementat
 
 ### 2. Add Or Update The Shared Sample
 
-- Keep reusable Bicep fixtures under `packages/node/test/samples/<capability>/`; this is the repository's canonical sample location despite the `node` path.
+- Keep reusable example Bicep fixtures under `samples/infra`; this is the canonical consumer-sample location.
 - Prefer extending an existing fixture when it remains understandable. Create a focused fixture when extension would mix unrelated behavior.
 - Make the sample deterministic, offline, and independent of Azure credentials or deployment.
 - Include only the Bicep constructs needed to demonstrate the behavior clearly.
-- Point every applicable language conformance test at the same fixture. Do not duplicate equivalent fixtures per language.
+- Update the runnable Jest, MSTest, Go `testing`, and Pester examples under `samples/` to demonstrate the capability idiomatically.
+- Point every applicable sample and conformance test at the same fixture. Do not duplicate equivalent fixtures per language.
 
 ### 3. Implement Idiomatically In Every Library
 
@@ -197,6 +198,9 @@ Pop-Location
 ./packages/powershell/build.ps1
 Invoke-Pester ./packages/powershell/test -CI
 ./packages/powershell/scripts/public-api.ps1 -Check
+
+# Runnable consumer samples
+./scripts/ValidateSamples.ps1
 ```
 
 Also check editor diagnostics for every changed implementation, test, manifest, script, and workflow file.

@@ -1,0 +1,13 @@
+{
+  "name": "bicep-test-node-sample",
+  "private": true,
+  "scripts": {
+    "test": "jest --runInBand"
+  },
+  "dependencies": {
+    "bicep-test": "file:../../packages/node"
+  },
+  "devDependencies": {
+    "jest": "30.4.2"
+  }
+}
