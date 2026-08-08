@@ -148,3 +148,6 @@ vite.config.ts.timestamp-*
 
 # Go
 packages/go/coverage.out
+
+# PowerShell
+packages/powershell/BicepTest/lib/

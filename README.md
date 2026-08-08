@@ -16,5 +16,6 @@ A set of libraries for writing tests against [Bicep](https://github.com/Azure/bi
 - [Node](docs/node.md): available through npm
 - [C#](docs/csharp.md): implemented, not yet available through NuGet
 - [Go](docs/go.md): implemented, not yet released as a versioned Go module
+- [PowerShell](docs/powershell.md): implemented, not yet available through the PowerShell Gallery
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for repository setup, build commands, tests, and project conventions.
